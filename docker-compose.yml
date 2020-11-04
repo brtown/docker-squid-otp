@@ -1,0 +1,39 @@
+version: '3.2'
+  
+services:
+  squid:
+    image: squid-otp:latest
+    depends_on:
+      - freeradius
+    ports:
+      - "8080:8080/tcp"
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "3"
+
+  freeradius:
+    image: freeradius-otp:latest
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    volumes:
+      - type: bind
+        source: /home
+        target: /home
+      - type: bind
+        source: /etc/passwd
+        target: /etc/passwd
+        read_only: true
+      - type: bind
+        source: /etc/group
+        target: /etc/group
+        read_only: true
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"
+        max-file: "3"
