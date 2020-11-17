@@ -1,0 +1,3 @@
+auth requisite /lib/security/pam_google_authenticator.so
+account required pam_permit.so
+session required pam_permit.so
