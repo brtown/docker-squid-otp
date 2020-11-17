@@ -5,6 +5,7 @@
 $ sudo -i
 # apt update
 # apt install -y vim git
+# git clone https://github.com/brtown/docker-squid-otp.git
 ```
 ## 2. Docker Installation
 ### Install
@@ -25,6 +26,12 @@ This message shows that your installation appears to be working correctly.
 :
 :
 :
+
+```
+## 3. FreeRADIUS
+### Create a Docker image
+```
+# cd docker-squid-otp/freeradius/
 
 ```
 ## 5. Google Authenticator Installation
