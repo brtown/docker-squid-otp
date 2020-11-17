@@ -27,19 +27,23 @@ This message shows that your installation appears to be working correctly.
 :
 
 ```
-## 3. Google Authenticator Installation
+## 5. Google Authenticator Installation
 ### Install
 ```
 # apt install -y libpam-google-authenticator
 ```
 ### Verify
 ```
-# adduser --disabled-password --gecos "" vpnuser
+# adduser --disabled-password --gecos "" proxyuser
 
-# su vpnuser
+# su proxyuser
 $ google-authenticator
 $ exit
 ```
+
+
+
+
 
 #### 2. Clone repository
 ```
