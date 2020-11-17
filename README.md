@@ -1,9 +1,30 @@
+(using Debian GNU/Linux 10 (buster)) 
 
-#### 1. Pre-Installation
+# 1. Pre-Installation
 ```
 $ sudo -i
 # apt update
-# apt install -y vim git docker docker-compose libpam-google-authenticator libqrencode4
+# apt install -y vim git
+```
+# 2. Install Docker
+Reference: https://docs.docker.com/engine/install/debian/
+```
+# apt update
+# apt install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+# curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+# apt-key fingerprint 0EBFCD88
+# add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+
+# apt update
+# apt install docker-ce docker-ce-cli containerd.io
 ```
 
 #### 2. Clone repository
