@@ -8,6 +8,8 @@ $ sudo -i
 ```
 # 2. Install Docker
 Reference: https://docs.docker.com/engine/install/debian/
+
+## Install
 ```
 # apt update
 # apt install \
@@ -25,6 +27,22 @@ Reference: https://docs.docker.com/engine/install/debian/
 
 # apt update
 # apt install docker-ce docker-ce-cli containerd.io
+```
+## Verify
+```
+# docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+0e03bdcc26d7: Pull complete 
+Digest: sha256:8c5aeeb6a5f3ba4883347d3747a7249f491766ca1caa47e5da5dfcf6b9b717c0
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+:
+:
+:
+
 ```
 
 #### 2. Clone repository
