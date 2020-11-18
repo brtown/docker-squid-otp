@@ -107,10 +107,10 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 08e2c3d14071        squid-otp:latest        "/usr/sbin/squid -NYC"   27 seconds ago      Up 26 seconds       0.0.0.0:8080->8080/tcp             squid-otp_squid_1
 fb16a5678364        freeradius-otp:latest   "/docker-entrypoint.…"   27 seconds ago      Up 27 seconds       0.0.0.0:1812-1813->1812-1813/udp   squid-otp_freeradius_1
 ```
-#### 6. Create new user
+### Create a new user
 ```
-# adduser --disabled-password --gecos "" proxyuser
-# su proxyuser
+# adduser --disabled-password --gecos "" newuser
+# su newuser
 $ google-authenticator
 $ exit
 # docker-compose restart
