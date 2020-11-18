@@ -7,7 +7,7 @@ $ sudo -i
 # apt install -y vim git
 # git clone https://github.com/brtown/docker-squid-otp.git
 ```
-## 2. Docker Installation
+## 2. Docker
 ### Install
 ```
 # apt install -y docker docker-compose
@@ -70,10 +70,19 @@ $ exit
 # docker stop sharp_kepler
 # docker rm sharp_kepler  
 ```
-
-
-
-## 5. Google Authenticator Installation
+## 4. Squid
+### create a Docker image
+```
+# cd ~/docker-squid-otp/squid/
+# docker build -t squid-otp:latest .
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+squid-otp           latest              bad935e6d7d7        50 seconds ago      17.6MB
+freeradius-otp      latest              29dcb3c203f4        17 minutes ago      14.3MB
+alpine              latest              d6e46aa2470d        3 weeks ago         5.57MB
+hello-world         latest              bf756fb1ae65        10 months ago       13.3kB
+```
+## 5. Google Authenticator (on Host)
 ### Install
 ```
 # apt install -y libpam-google-authenticator
@@ -86,40 +95,7 @@ $ exit
 $ google-authenticator
 $ exit
 ```
-
-
-
-
-
-#### 2. Clone repository
-```
-# git clone https://github.com/brtown/Squid-OTP.git
-# cd Squid-OTP/
-```
-
-#### 3. Create a Docker Image of FreeRADIUS (including OTP Authentication with Google Authenticator)
-```
-# cd FreeRADIUS/
-# chmod +x docker-entrypoint.sh
-# docker build -t freeradius-otp:latest .
-# docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-freeradius-otp      latest              61b743094339        7 seconds ago       16.1MB
-alpine              latest              a24bb4013296        8 weeks ago         5.57MB
-```
-
-#### 4. Create a Docker Image of Squid
-```
-# cd ../Squid
-# docker build -t squid-otp:latest .
-# docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-squid-otp           latest              36ae18af19cb        14 seconds ago      19.4MB
-freeradius-otp      latest              61b743094339        10 minutes ago      16.1MB
-alpine              latest              a24bb4013296        8 weeks ago         5.57MB
-```
-
-#### 5. Start Containers
+### 6. Start Containers
 ```
 # cd ..
 # docker-compose up -d
@@ -131,7 +107,6 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 08e2c3d14071        squid-otp:latest        "/usr/sbin/squid -NYC"   27 seconds ago      Up 26 seconds       0.0.0.0:8080->8080/tcp             squid-otp_squid_1
 fb16a5678364        freeradius-otp:latest   "/docker-entrypoint.…"   27 seconds ago      Up 27 seconds       0.0.0.0:1812-1813->1812-1813/udp   squid-otp_freeradius_1
 ```
-
 #### 6. Create new user
 ```
 # adduser --disabled-password --gecos "" proxyuser
