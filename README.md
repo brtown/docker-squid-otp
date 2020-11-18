@@ -32,8 +32,47 @@ This message shows that your installation appears to be working correctly.
 ### Create a Docker image
 ```
 # cd docker-squid-otp/freeradius/
-
+# chmod 755 docker-entrypoint.sh
+# docker build -t freeradius-otp:latest .
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+freeradius-otp      latest              159e3d1b5e5b        4 seconds ago       14.3MB
+alpine              latest              d6e46aa2470d        3 weeks ago         5.57MB
+hello-world         latest              bf756fb1ae65        10 months ago       13.3kB
 ```
+### Run created image
+```
+# docker run -it -d freeradius-otp:latest
+# docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS               NAMES
+d7e44158eae2        freeradius-otp:latest   "/docker-entrypoint.…"   11 seconds ago      Up 10 seconds       1812-1813/udp       sharp_kepler
+```
+### Verity One-Time-Password
+```
+# docker exec -it sharp_kepler sh
+/ # adduser --disabled-password raduser
+/ # su - raduser
+$ radtest raduser 821523 localhost 1812 KJjYSXS6KdGWos
+Sent Access-Request Id 36 from 0.0.0.0:55240 to 127.0.0.1:1812 length 77
+	User-Name = "raduser"
+	User-Password = "821523"
+	NAS-IP-Address = 172.17.0.2
+	NAS-Port = 1812
+	Message-Authenticator = 0x00
+	Cleartext-Password = "821523"
+Received Access-Accept Id 36 from 127.0.0.1:1812 to 127.0.0.1:55240 length 20
+```
+
+### Complete
+```
+$ exit
+/ # exit
+# docker stop sharp_kepler
+# docker rm sharp_kepler  
+```
+
+
+
 ## 5. Google Authenticator Installation
 ### Install
 ```
