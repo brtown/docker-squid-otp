@@ -95,7 +95,7 @@ hello-world         latest              bf756fb1ae65        10 months ago       
 $ google-authenticator
 $ exit
 ```
-### 6. Start Containers
+## 6. Start Containers
 ```
 # cd ~/docker-squid-otp/
 # docker-compose up -d
