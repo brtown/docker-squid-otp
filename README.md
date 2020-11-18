@@ -103,9 +103,9 @@ Creating network "squid-otp_default" with the default driver
 Creating squid-otp_freeradius_1 ... done
 Creating squid-otp_squid_1      ... done
 # docker ps
-CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                              NAMES
-08e2c3d14071        squid-otp:latest        "/usr/sbin/squid -NYC"   27 seconds ago      Up 26 seconds       0.0.0.0:8080->8080/tcp             squid-otp_squid_1
-fb16a5678364        freeradius-otp:latest   "/docker-entrypoint.…"   27 seconds ago      Up 27 seconds       0.0.0.0:1812-1813->1812-1813/udp   squid-otp_freeradius_1
+CONTAINER ID        IMAGE                   COMMAND                  CREATED              STATUS              PORTS                              NAMES
+d282526184ad        squid-otp:latest        "/usr/sbin/squid -NYC"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp             docker-squid-otp_squid_1
+ff277791904d        freeradius-otp:latest   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:1812-1813->1812-1813/udp   docker-squid-otp_freeradius_1
 ```
 ### Create a new user
 ```
