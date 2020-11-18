@@ -97,7 +97,7 @@ $ exit
 ```
 ### 6. Start Containers
 ```
-# cd ..
+# cd ~/docker-squid-otp/
 # docker-compose up -d
 Creating network "squid-otp_default" with the default driver
 Creating squid-otp_freeradius_1 ... done
