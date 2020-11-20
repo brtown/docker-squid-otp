@@ -1,4 +1,4 @@
-(using Ubuntu 20.04 LTS Minimal) 
+(using Ubuntu 18.04 LTS Minimal) 
 
 ## 1. Pre-Installation
 ```
