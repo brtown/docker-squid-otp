@@ -52,6 +52,7 @@ d7e44158eae2        freeradius-otp:latest   "/docker-entrypoint.…"   11 second
 # docker exec -it sharp_kepler sh
 / # adduser --disabled-password raduser
 / # su - raduser
+$ google-authenticator
 $ radtest raduser 821523 localhost 1812 KJjYSXS6KdGWos
 Sent Access-Request Id 36 from 0.0.0.0:55240 to 127.0.0.1:1812 length 77
 	User-Name = "raduser"
@@ -87,14 +88,6 @@ hello-world         latest              bf756fb1ae65        10 months ago       
 ```
 # apt install -y libpam-google-authenticator
 ```
-### Verify
-```
-# adduser --disabled-password --gecos "" proxyuser
-
-# su proxyuser
-$ google-authenticator
-$ exit
-```
 ## 6. Start Containers
 ```
 # cd ~/docker-squid-otp/
@@ -103,15 +96,28 @@ Creating network "squid-otp_default" with the default driver
 Creating squid-otp_freeradius_1 ... done
 Creating squid-otp_squid_1      ... done
 # docker ps
-CONTAINER ID        IMAGE                   COMMAND                  CREATED              STATUS              PORTS                              NAMES
-d282526184ad        squid-otp:latest        "/usr/sbin/squid -NYC"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp             docker-squid-otp_squid_1
-ff277791904d        freeradius-otp:latest   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:1812-1813->1812-1813/udp   docker-squid-otp_freeradius_1
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                              NAMES
+57804f78057e        squid-otp:latest        "/usr/sbin/squid -NYC"   4 minutes ago       Up 4 minutes        0.0.0.0:8080->8080/tcp             dockersquidotp_squid_1
+2eef3e0e611b        freeradius-otp:latest   "/docker-entrypoint.…"   4 minutes ago       Up 4 minutes        0.0.0.0:1812-1813->1812-1813/udp   dockersquidotp_freeradius_1
 ```
-### Create a new user
+## 7. Create a new user
 ```
 # adduser --disabled-password --gecos "" newuser
-# su newuser
+# su - newuser
 $ google-authenticator
 $ exit
 # docker-compose restart
+```
+### Verify
+```
+# docker exec -it dockersquidotp_freeradius_1 sh
+# radtest newuser 126533 localhost 1812 KJjYSXS6KdGWos
+Sent Access-Request Id 180 from 0.0.0.0:49048 to 127.0.0.1:1812 length 77
+	User-Name = "newuser"
+	User-Password = "126533"
+	NAS-IP-Address = 172.18.0.2
+	NAS-Port = 1812
+	Message-Authenticator = 0x00
+	Cleartext-Password = "126533"
+Received Access-Accept Id 180 from 127.0.0.1:1812 to 127.0.0.1:49048 length 20
 ```
