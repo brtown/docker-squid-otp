@@ -104,9 +104,7 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 ## 7. Create a new user
 ```
 # adduser --disabled-password --gecos "" newuser
-# su - newuser
-$ google-authenticator
-$ exit
+# sudo -H -u vpnuser google-authenticator
 # docker-compose restart
 ```
 ### Verify
